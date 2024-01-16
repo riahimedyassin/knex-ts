@@ -147,3 +147,10 @@ export async function seed(knex: Knex): Promise<void> {
   await knex("books").insert(books);
 }
 ```
+## CRUD Operations 
+### GET 
+```ts
+  knex('table_name').select("* or field_name"); 
+  knex('table_name').limit("number").offset("number").orderBy("field_name","asc or desc"); 
+  knex('table_name').limit("number").offset("number").select("*"); 
+```
