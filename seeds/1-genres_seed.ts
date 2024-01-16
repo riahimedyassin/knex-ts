@@ -1,9 +1,10 @@
 import { faker } from "@faker-js/faker";
 import { Knex } from "knex";
+import { IGenre } from "../src/types/IGenre";
 
 const SEED_COUNT = 10;
 
-const createGenre = () => ({
+const createGenre = (): Partial<IGenre> => ({
   name: faker.lorem.words(2),
 });
 
