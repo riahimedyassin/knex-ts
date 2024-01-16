@@ -1,5 +1,3 @@
-import knex from "./config/knex";
-
 import { onDatabaseConnect } from "./config/knex";
 
 onDatabaseConnect()
