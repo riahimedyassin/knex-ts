@@ -188,5 +188,13 @@ knex("table_name")
 knex("table_name").insert(body, "*");
 knex("table_name").insert(body, ["id", "name"]);
 ```
+
 If you have foreign keys , check the existance of the values first before attemting to insert the data to DB.
 
+### UPDATE
+
+```ts
+await knex("table_name").where(condition).update(body, "*");
+```
+
+### DELETE

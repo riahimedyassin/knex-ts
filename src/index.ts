@@ -5,6 +5,8 @@ import {
   getAllBooks,
   getAuthorByID,
   getBooksByID,
+  updateAuthor,
+  updateBook,
 } from "../examples/CRUD";
 import { onDatabaseConnect } from "./config/knex";
 import { IAuthor } from "./types/IAuthor";
@@ -27,15 +29,19 @@ const main = async () => {
     // };
     // const author = await createAuthor(yassin);
     // console.log(author);
-    const book: Partial<IBook> = {
-      title: "Book title 5",
-      author_id: 51,
-      genre_id: 1,
-      descreption: "Sample descreption",
-      price: 200,
-    };
-    const res = await createBook(book);
-    console.log(res)
+    // const book: Partial<IBook> = {
+    //   title: "Book title 5",
+    //   author_id: 51,
+    //   genre_id: 1,
+    //   descreption: "Sample descreption",
+    //   price: 200,
+    // };
+    // const res = await createBook(book);
+    // console.log(res)
+    // const author = await updateAuthor(11, { name: "Mohamed Yassin" });
+    // console.log(author);
+    const book = await updateBook(14, { title: "HOLAA AMIGOS", author_id: 11 });
+    console.log(book);
   } catch (error) {
     console.log(error);
   }

@@ -59,3 +59,23 @@ export const createBook = async (body: Partial<IBook>) => {
   const book = await knex("books").insert(body, "*");
   return book;
 };
+
+export const updateAuthor = async (id: number, body: Partial<IAuthor>) => {
+  await authorExist(id);
+  const author = await knex("authors").where({ id }).update(body, "*");
+  return author[0];
+};
+const existBook = async (id: number) => {
+  if (!id) throw new Error("NO ID Provided : Possibly null");
+  const book = await knex("books").where({ id });
+  if (!book) throw new Error("ID is Invalid for the book");
+};
+
+export const updateBook = async (id: number, body: Partial<IBook>) => {
+  await existBook(id);
+  const { author_id, genre_id } = body;
+  if (author_id) await authorExist(author_id);
+  if (genre_id) await genreExist(genre_id);
+  const book = await knex("books").where({ id }).update(body, "*");
+  return book[0];
+};
