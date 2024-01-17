@@ -1,4 +1,5 @@
 import knex from "../src/config/knex";
+import { IAuthor } from "../src/types/IAuthor";
 import { IBook } from "../src/types/IBook";
 
 export const getAllAuthers = async (limit: number, offset: number) => {
@@ -29,5 +30,32 @@ export const getAuthorByID = async (id: number) => {
 };
 export const getBooksByID = async (id: number) => {
   const book = await knex("books").select("*").where("id", "=", id).first();
+  return book;
+};
+
+export const getGenreByID = async (id: number) => {
+  const genre = await knex("genres").select("*").where({ id });
+  return genre;
+};
+
+export const createAuthor = async (body: Partial<IAuthor>) => {
+  const author = await knex("authors").insert(body, "*");
+  return author[0];
+};
+export const authorExist = async (id?: number) => {
+  if (!id) throw new Error("Author ID does not exist");
+  const author = await getAuthorByID(id);
+  if (!author) throw new Error("ID is Invalid");
+};
+export const genreExist = async (id?: number) => {
+  if (!id) throw new Error("Genre ID does not exist");
+  const genre = await getGenreByID(id);
+  if (!genre) throw new Error("ID is Invalid");
+};
+
+export const createBook = async (body: Partial<IBook>) => {
+  await authorExist(body.author_id);
+  await genreExist(body.genre_id);
+  const book = await knex("books").insert(body, "*");
   return book;
 };

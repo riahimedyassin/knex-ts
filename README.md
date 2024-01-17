@@ -147,15 +147,46 @@ export async function seed(knex: Knex): Promise<void> {
   await knex("books").insert(books);
 }
 ```
-## CRUD Operations 
-### GET 
-```ts
-  knex('table_name').select("* or field_name"); 
-  knex('table_name').limit("number").offset("number").orderBy("field_name","asc or desc"); 
-  knex('table_name').limit("number").offset("number").select("*"); 
-  knex('table_name').limit("number").offset("number").select("*").where({field_name: value}); 
-  knex('table_name').limit("number").offset("number").select("*").where('field_name','operator',value); 
-  knex('table_name').limit("number").offset("number").select("*").limit(limit).offset(offset); 
-  knex('table_name').limit("number").offset("number").select("*").orderBy('fiedl_name'); 
 
+## CRUD Operations
+
+### GET
+
+```ts
+knex("table_name").select("* or field_name");
+knex("table_name")
+  .limit("number")
+  .offset("number")
+  .orderBy("field_name", "asc or desc");
+knex("table_name").limit("number").offset("number").select("*");
+knex("table_name")
+  .limit("number")
+  .offset("number")
+  .select("*")
+  .where({ field_name: value });
+knex("table_name")
+  .limit("number")
+  .offset("number")
+  .select("*")
+  .where("field_name", "operator", value);
+knex("table_name")
+  .limit("number")
+  .offset("number")
+  .select("*")
+  .limit(limit)
+  .offset(offset);
+knex("table_name")
+  .limit("number")
+  .offset("number")
+  .select("*")
+  .orderBy("fiedl_name");
 ```
+
+### CREATE
+
+```ts
+knex("table_name").insert(body, "*");
+knex("table_name").insert(body, ["id", "name"]);
+```
+If you have foreign keys , check the existance of the values first before attemting to insert the data to DB.
+
