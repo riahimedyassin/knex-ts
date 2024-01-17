@@ -198,3 +198,6 @@ await knex("table_name").where(condition).update(body, "*");
 ```
 
 ### DELETE
+```ts
+    await knex("table_name").where(condition).delete()
+```

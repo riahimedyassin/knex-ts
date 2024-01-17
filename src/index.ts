@@ -1,6 +1,7 @@
 import {
   createAuthor,
   createBook,
+  deleteAuthor,
   getAllAuthers,
   getAllBooks,
   getAuthorByID,
@@ -40,8 +41,9 @@ const main = async () => {
     // console.log(res)
     // const author = await updateAuthor(11, { name: "Mohamed Yassin" });
     // console.log(author);
-    const book = await updateBook(14, { title: "HOLAA AMIGOS", author_id: 11 });
-    console.log(book);
+    // const book = await updateBook(14, { title: "HOLAA AMIGOS", author_id: 11 });
+    // console.log(book);
+    await deleteAuthor(11); 
   } catch (error) {
     console.log(error);
   }

@@ -79,3 +79,17 @@ export const updateBook = async (id: number, body: Partial<IBook>) => {
   const book = await knex("books").where({ id }).update(body, "*");
   return book[0];
 };
+export const deleteBook = async (id: number) => {
+  await existBook(id);
+  await knex("books").where({ id }).delete();
+  return true;
+};
+export const deleteAuthor = async (id: number) => {
+  await authorExist(id);
+  const bookCount = await knex("books")
+    .count()
+    .where({ author_id: id })
+    .first();
+  if (bookCount?.count == 0) await knex("authors").where({ id }).delete();
+  else throw new Error("This author have books");
+};
