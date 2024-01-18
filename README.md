@@ -247,3 +247,5 @@ Simply transactions are like sessions in mongoose , if you want to chain a list 
       )
     )[0];
 ```
+
+### Query Builder

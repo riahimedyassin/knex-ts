@@ -9,6 +9,7 @@ import {
   updateAuthor,
   updateBook,
 } from "../examples/CRUD";
+import { getAuthorPaginated } from "../examples/queryBuilder";
 import {
   getAuthorsWithBooksCount,
   getBooksWithAuthorAndGenre,
@@ -49,7 +50,7 @@ const main = async () => {
     // const book = await updateBook(14, { title: "HOLAA AMIGOS", author_id: 11 });
     // console.log(book);
     // await deleteAuthor(11);
-    await createAuthorWithBook();
+    console.log(await getAuthorPaginated(5,0))
   } catch (error) {
     console.log(error);
   }
