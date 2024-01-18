@@ -249,3 +249,16 @@ Simply transactions are like sessions in mongoose , if you want to chain a list 
 ```
 
 ### Query Builder
+You can use a query builder to simply and write a better code with knex , as query builders will help you clone queries , prepae and re-use them in the future .
+**Example**
+
+```ts
+  //Query Builder Example 
+  const queryBuilder = knex('authors')
+  const secondQueryBuilder = queryBuilder.clone()
+  queryBuilder.limit(5)
+  queryBuilder.offset(5)
+  const authors = await queryBuilder ; 
+  queryBuilder.clearLimit()
+  queryBuilder.clearOffSet()
+```

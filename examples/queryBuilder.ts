@@ -5,8 +5,9 @@ export const getAuthorPaginated = async (
   limit: number,
   offset: number
 ): Promise<{ data: IAuthor[]; count: number }> => {
-  const authors = await knex("authors").select("*").limit(limit).offset(offset);
-  const count = (await knex("authors").count("id").first())?.count;
+  const queryBuilder = knex("authors");
+  const authors = await queryBuilder.select("*").limit(limit).offset(offset);
+  const count = (await queryBuilder.count("id").first())?.count;
   return {
     data: authors,
     count: Number(count),
