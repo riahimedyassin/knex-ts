@@ -198,6 +198,52 @@ await knex("table_name").where(condition).update(body, "*");
 ```
 
 ### DELETE
+
 ```ts
-    await knex("table_name").where(condition).delete()
+await knex("table_name").where(condition).delete();
+```
+
+## Complex Operations
+
+### JOINS
+
+In this example, I will provide a real query used in a project that uses complex queries chained together.
+
+```ts
+const authors = await knex("authors")
+  .join("books", "books.author_id", "authors.id")
+  .select("authors.name", knex.raw("count(books.id) as books_count"))
+  .groupBy("authors.id")
+  .orderBy("books_count", "desc")
+  .limit(5);
+return authors;
+```
+### Transactions
+Simply transactions are like sessions in mongoose , if you want to chain a list of queries that need to be excuted together or right after each other and failing one mean failing the others too for security reason , you may need to use transactions.
+
+**Example**
+
+```ts
+  await knex.transaction(async (trx) => {
+    const author = (
+      await trx("authors").insert(
+        {
+          name: "transaction authorzad az",
+          bio: "sample bio",
+        },
+        "*"
+      )
+    )[0];
+    const book = (
+      await trx("books").insert(
+        {
+          title: "Test boookasads",
+          descreption: "transaction book",
+          author_id: author.id,
+          price: 100,
+          genre_id: 1,
+        },
+        "*"
+      )
+    )[0];
 ```

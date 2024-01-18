@@ -9,6 +9,11 @@ import {
   updateAuthor,
   updateBook,
 } from "../examples/CRUD";
+import {
+  getAuthorsWithBooksCount,
+  getBooksWithAuthorAndGenre,
+} from "../examples/realtions";
+import { createAuthorWithBook, getLastAuthor } from "../examples/transaction";
 import { onDatabaseConnect } from "./config/knex";
 import { IAuthor } from "./types/IAuthor";
 import { IBook } from "./types/IBook";
@@ -43,7 +48,8 @@ const main = async () => {
     // console.log(author);
     // const book = await updateBook(14, { title: "HOLAA AMIGOS", author_id: 11 });
     // console.log(book);
-    await deleteAuthor(11); 
+    // await deleteAuthor(11);
+    await createAuthorWithBook();
   } catch (error) {
     console.log(error);
   }

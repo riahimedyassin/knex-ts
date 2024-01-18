@@ -93,3 +93,5 @@ export const deleteAuthor = async (id: number) => {
   if (bookCount?.count == 0) await knex("authors").where({ id }).delete();
   else throw new Error("This author have books");
 };
+
+const amig: Partial<IBook & { name: string }> = {};
